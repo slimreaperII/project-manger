@@ -1,6 +1,6 @@
 import logo from "../assets/no-projects.png";
 
-export default function LandingPage({ onAddNewProject, projectDetail }) {
+export default function LandingPage({ onAdd }) {
   return (
     <div className="flex-1 flex-col justify-items-center mt-24">
       <img
@@ -17,7 +17,7 @@ export default function LandingPage({ onAddNewProject, projectDetail }) {
       <div className="mt-8">
         <button
           className="bg-stone-800 text-stone-200 hover:bg-stone-950 px-6 py-2 rounded-md font-bold"
-          onClick={onAddNewProject}
+          onClick={onAdd}
         >
           create new project
         </button>

@@ -27,19 +27,31 @@ function App() {
     });
   }
 
+  function handleSaveProject(newProject) {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProject: undefined,
+        projects: [...prevState.projects, newProject],
+      };
+    });
+  }
+
   let content;
   if (projectState.selectedProject === null) {
-    content = <NewProject onCancelNewProject={handleCancelAddProject} />;
+    content = (
+      <NewProject
+        onCancel={handleCancelAddProject}
+        onSave={handleSaveProject}
+      />
+    );
   } else if (projectState.selectedProject === undefined) {
-    content = <LandingPage onAddNewProject={handleAddProject} />;
+    content = <LandingPage onAdd={handleAddProject} />;
   }
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <Sidebar
-        onAddNewProject={handleAddProject}
-        projectDetail={projectState}
-      />
+      <Sidebar onAdd={handleAddProject} projectDetail={projectState} />
       {content}
     </main>
   );
