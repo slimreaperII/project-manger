@@ -1,4 +1,4 @@
-export default function Sidebar({ onAdd, projectDetail }) {
+export default function Sidebar({ onAdd, projectDetail, onSelect }) {
   const { selectedProject, projects } = projectDetail;
 
   return (
@@ -13,13 +13,29 @@ export default function Sidebar({ onAdd, projectDetail }) {
         + Add Projects
       </button>
       <ul className="mt-6">
-        {projects.map((project, index) => (
-          <li key={index}>
-            <button className="w-full text-left px-2 py-1 rounded-sm my-2 text-stone-200 hover:bg-stone-800">
-              {project.title}
-            </button>
-          </li>
-        ))}
+        {projects.map((project, index) => {
+          let btnStyle =
+            "w-full text-left px-2 py-1 rounded-md my-2 hover:bg-stone-800";
+
+          if (project.title === selectedProject) {
+            btnStyle += " bg-stone-800 text-stone-200";
+          } else {
+            btnStyle += " text-stone-400";
+          }
+
+          return (
+            <li key={index}>
+              <button
+                className={btnStyle}
+                onClick={() => {
+                  onSelect(project.title);
+                }}
+              >
+                {project.title}
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </aside>
   );
